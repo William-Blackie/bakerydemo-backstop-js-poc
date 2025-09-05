@@ -7,10 +7,13 @@
     "node": ">=22"
   },
   "devDependencies": {
+    "axios": "^1.11.0",
+    "backstopjs": "^6.3.25",
     "eslint": "^8.55.0",
     "prettier": "^3.1.0",
     "stylelint": "^15.11.0",
-    "stylelint-config-standard": "^34.0.0"
+    "stylelint-config-standard": "^34.0.0",
+    "xml2js": "^0.6.2"
   },
   "scripts": {
     "fix:js": "eslint --ext .js --fix .",
@@ -19,6 +22,16 @@
     "lint:js": "eslint --ext .js --report-unused-disable-directives .",
     "lint:css": "stylelint **/*.css",
     "lint:format": "prettier --check \"**/?(.)*.{css,js,json,yaml,yml}\"",
-    "lint": "npm run lint:js && npm run lint:css && npm run lint:format"
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:format",
+    "backstop:init": "backstop init",
+    "backstop:reference": "backstop reference --config=backstop.config.js",
+    "backstop:test": "backstop test --config=backstop.config.js",
+    "backstop:approve": "backstop approve --config=backstop.config.js",
+    "fetch-sitemap": "node scripts/fetchSitemap.js",
+    "fetch-sitemap:mock": "USE_MOCK=true node scripts/fetchSitemap.js",
+    "visual-test": "npm run fetch-sitemap && npm run backstop:test",
+    "visual-reference": "npm run fetch-sitemap && npm run backstop:reference",
+    "visual-test:mock": "npm run fetch-sitemap:mock && npm run backstop:test",
+    "visual-reference:mock": "npm run fetch-sitemap:mock && npm run backstop:reference"
   }
 }
